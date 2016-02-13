@@ -50,11 +50,4 @@ class TweetCell: UITableViewCell {
             }
         }
     }
-    override func layoutSubviews() {
-//        replyButton.setImage(UIImage(named: "reply_icon_highlighted"), forState: .Highlighted)
-//        retweetButton.setImage(UIImage(named: "retweet_icon_highlighted"), forState: .Highlighted)
-//        favoriteButton.setImage(UIImage(named: "favorite_icon_highlighted"), forState: .Highlighted)
-    }
-    
-    
 }
