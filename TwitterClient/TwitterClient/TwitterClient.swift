@@ -63,22 +63,9 @@ class TwitterClient: BDBOAuth1SessionManager {
                     print("Failed to get current user")
                     self.loginComplition?(user: nil, error: error)
             })
-            
-//            TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: nil, progress: { (progress: NSProgress) -> Void in
-//                }, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-//                    //                    print("home timeline: \(response)")
-//                    let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
-//                    
-//                }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
-//                    print("Failed to get home timeline")
-//            })
-            
-            
             }) { (error: NSError!) -> Void in
                 print("Failed to get access token.")
                 self.loginComplition?(user: nil, error: error)
         }
     }
-    
-    
 }

@@ -50,10 +50,16 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func onLogOut(sender: AnyObject) {
-        print("log out!")
+        print("logged out!")
         User.currentUser?.logOut()
-        performSegueWithIdentifier("ToLogin", sender: nil)
+        TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
+        NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
     }
+    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {

@@ -137,21 +137,13 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhS-Qy-jfQ">
-                                                    <rect key="frame" x="15" y="112" width="20" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="7YZ-rV-1g0"/>
-                                                        <constraint firstAttribute="height" constant="20" id="ihQ-cY-QLU"/>
-                                                    </constraints>
-                                                    <state key="normal" image="reply_icon copy.png"/>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-k3-CMo">
                                                     <rect key="frame" x="90" y="112" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="ajK-CB-X8t"/>
                                                         <constraint firstAttribute="height" constant="20" id="wfL-56-jFT"/>
                                                     </constraints>
-                                                    <state key="normal" image="retweet_icon copy.png"/>
+                                                    <state key="normal" image="retweet_icon.png"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vu-uB-gkk">
                                                     <rect key="frame" x="165" y="112" width="20" height="20"/>
@@ -159,20 +151,28 @@
                                                         <constraint firstAttribute="height" constant="20" id="Ugf-db-fhC"/>
                                                         <constraint firstAttribute="width" constant="20" id="kRt-RV-793"/>
                                                     </constraints>
-                                                    <state key="normal" image="favorite_icon copy.png"/>
+                                                    <state key="normal" image="favorite_icon.png"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opN-0t-GdF">
-                                                    <rect key="frame" x="114" y="114" width="29" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opN-0t-GdF">
+                                                    <rect key="frame" x="114" y="122" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                     <color key="textColor" red="0.80000000000000004" green="0.83921568627450982" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyQ-7a-Nen">
-                                                    <rect key="frame" x="189" y="115" width="29" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cyQ-7a-Nen">
+                                                    <rect key="frame" x="189" y="122" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                     <color key="textColor" red="0.80000000000000004" green="0.83921568629999999" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhS-Qy-jfQ">
+                                                    <rect key="frame" x="15" y="112" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="7YZ-rV-1g0"/>
+                                                        <constraint firstAttribute="height" constant="20" id="ihQ-cY-QLU"/>
+                                                    </constraints>
+                                                    <state key="normal" image="reply_icon.png"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="84v-tO-sYj" firstAttribute="leading" secondItem="6qM-PL-zzd" secondAttribute="trailing" constant="8" id="0N2-EQ-aYO"/>
@@ -234,7 +234,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="HBH-6j-xU9" id="fEX-9M-Uv5"/>
-                        <segue destination="BYZ-38-t0r" kind="modal" identifier="ToLogin" modalTransitionStyle="flipHorizontal" id="yhE-Gz-yYv"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="ToLogin" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="yhE-Gz-yYv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXz-aA-y3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -263,8 +263,8 @@
     <resources>
         <image name="Twitter_icon_white.png" width="300" height="300"/>
         <image name="Twitter_tweet_logo.png" width="100" height="100"/>
-        <image name="favorite_icon copy.png" width="100" height="100"/>
-        <image name="reply_icon copy.png" width="100" height="100"/>
-        <image name="retweet_icon copy.png" width="100" height="100"/>
+        <image name="favorite_icon.png" width="100" height="100"/>
+        <image name="reply_icon.png" width="100" height="100"/>
+        <image name="retweet_icon.png" width="100" height="100"/>
     </resources>
 </document>

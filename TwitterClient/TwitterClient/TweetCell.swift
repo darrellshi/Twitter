@@ -14,9 +14,13 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
-
+    
     @IBOutlet weak var favoriteCountLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
+    
+//    @IBOutlet weak var replyButton: UIButton!
+//    @IBOutlet weak var retweetButton: UIButton!
+//    @IBOutlet weak var favoriteButton: UIButton!
     var tweet: Tweet? {
         didSet{
             userNameLabel.text = tweet?.user?.name
@@ -33,6 +37,24 @@ class TweetCell: UITableViewCell {
             if let imageURL = tweet?.user?.profileURL {
                 userProfileImageView.setImageWithURL(NSURL(string: imageURL)!)
             }
+            
+            
+            if let retweetCount = tweet?.retweetCount {
+                retweetCountLabel.text = String(retweetCount)
+            }
+            
+            if let favoritedCount = tweet?.favoritesCount {
+                if favoritedCount != 0 {
+                    favoriteCountLabel.text = String(favoritedCount)
+                }
+            }
         }
     }
+    override func layoutSubviews() {
+//        replyButton.setImage(UIImage(named: "reply_icon_highlighted"), forState: .Highlighted)
+//        retweetButton.setImage(UIImage(named: "retweet_icon_highlighted"), forState: .Highlighted)
+//        favoriteButton.setImage(UIImage(named: "favorite_icon_highlighted"), forState: .Highlighted)
+    }
+    
+    
 }
