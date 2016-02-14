@@ -37,8 +37,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
-    func homeTimelineWithCompletion(params: NSDictionary?,completion: (tweets: [Tweet]?, error: NSError?)->()) {
-        TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: params, progress: { (progress: NSProgress) -> Void in
+    func homeTimelineWithCompletion(greaterThan: String, params: NSDictionary?,completion: (tweets: [Tweet]?, error: NSError?)->()) {
+        TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json\(greaterThan)", parameters: params, progress: { (progress: NSProgress) -> Void in
             }, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 //                    print("home timeline: \(response)")
                 let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
@@ -51,6 +51,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     func openURL(url: NSURL) {
         fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken:BDBOAuth1Credential(queryString: url.query), success: { (accessToken: BDBOAuth1Credential!) -> Void in
             print("Successfully got the access token!")
+            print(accessToken)
             TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
             
             TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, progress: { (progress: NSProgress) -> Void in

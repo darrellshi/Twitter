@@ -15,6 +15,7 @@ class Tweet {
     var createdAt: NSDate?
     var retweetCount: Int?
     var favoritesCount: Int?
+    var id: Int?
     
     init(dictionary: NSDictionary) {
         if let user = dictionary["user"] as? NSDictionary {
@@ -29,6 +30,8 @@ class Tweet {
         
         retweetCount = dictionary["retweet_count"] as? Int
         favoritesCount = dictionary["favorite_count"] as? Int
+        
+        id = dictionary["id"] as? Int
     }
     
     class func tweetsWithArray(array: [NSDictionary]) -> [Tweet] {
@@ -39,5 +42,50 @@ class Tweet {
         }
         
         return tweets
+    }
+    
+    private func sendPOSTRequest(URLString: String, completion: (response: AnyObject?, error: NSError?)->Void) {
+        TwitterClient.sharedInstance.POST(URLString, parameters: nil, progress: { (progress: NSProgress) -> Void in
+            }, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                completion(response: response, error: nil)
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                completion(response: nil, error: error)
+        }
+    }
+    
+    func retweet(completion: (response: AnyObject?, error: NSError?)->Void) {
+        if let id = self.id {
+            sendPOSTRequest("1.1/statuses/retweet/\(id).json?id=\(id)", completion: completion)
+        } else {
+            completion(response: nil, error: nil)
+            print("Counldn't get tweet id")
+        }
+    }
+    
+    func unretweet(completion: (response: AnyObject?, error: NSError?)->Void) {
+        if let id = self.id {
+            sendPOSTRequest("1.1/statuses/unretweet/\(id).json?id=\(id)", completion: completion)
+        } else {
+            completion(response: nil, error: nil)
+            print("Counldn't get tweet id")
+        }
+    }
+    
+    func favorite(completion: (response: AnyObject?, error: NSError?)->Void) {
+        if let id = self.id {
+            sendPOSTRequest("1.1/favorites/create.json?id=\(id)", completion: completion)
+        } else {
+            completion(response: nil, error: nil)
+            print("Counldn't get tweet id")
+        }
+    }
+    
+    func unfavorite(completion: (response: AnyObject?, error: NSError?)->Void) {
+        if let id = self.id {
+            sendPOSTRequest("1.1/favorites/destroy.json?id=\(id)", completion: completion)
+        } else {
+            completion(response: nil, error: nil)
+            print("Counldn't get tweet id")
+        }
     }
 }

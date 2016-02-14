@@ -144,6 +144,9 @@
                                                         <constraint firstAttribute="height" constant="20" id="wfL-56-jFT"/>
                                                     </constraints>
                                                     <state key="normal" image="retweet_icon.png"/>
+                                                    <connections>
+                                                        <action selector="onRetweet:" destination="ba1-Y1-XOE" eventType="touchUpInside" id="8Pj-cI-LSL"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vu-uB-gkk">
                                                     <rect key="frame" x="165" y="112" width="20" height="20"/>
@@ -152,6 +155,9 @@
                                                         <constraint firstAttribute="width" constant="20" id="kRt-RV-793"/>
                                                     </constraints>
                                                     <state key="normal" image="favorite_icon.png"/>
+                                                    <connections>
+                                                        <action selector="onFavorite:" destination="ba1-Y1-XOE" eventType="touchUpInside" id="1wO-8Y-8s5"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opN-0t-GdF">
                                                     <rect key="frame" x="114" y="122" width="0.0" height="0.0"/>
@@ -172,6 +178,9 @@
                                                         <constraint firstAttribute="height" constant="20" id="ihQ-cY-QLU"/>
                                                     </constraints>
                                                     <state key="normal" image="reply_icon.png"/>
+                                                    <connections>
+                                                        <action selector="onReply:" destination="ba1-Y1-XOE" eventType="touchUpInside" id="OTs-Sc-fd5"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -203,7 +212,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="1Vu-uB-gkk" id="62m-rt-XFJ"/>
                                             <outlet property="favoriteCountLabel" destination="cyQ-7a-Nen" id="8Tj-JV-vUX"/>
+                                            <outlet property="retweetButton" destination="zqt-k3-CMo" id="7r0-lt-uWs"/>
                                             <outlet property="retweetCountLabel" destination="opN-0t-GdF" id="wzO-GX-pqt"/>
                                             <outlet property="screenNameLabel" destination="84v-tO-sYj" id="8bH-fT-S4c"/>
                                             <outlet property="timeLabel" destination="DcY-2f-Cpr" id="cxh-WN-h3X"/>
@@ -263,8 +274,8 @@
     <resources>
         <image name="Twitter_icon_white.png" width="300" height="300"/>
         <image name="Twitter_tweet_logo.png" width="100" height="100"/>
-        <image name="favorite_icon.png" width="100" height="100"/>
-        <image name="reply_icon.png" width="100" height="100"/>
-        <image name="retweet_icon.png" width="100" height="100"/>
+        <image name="favorite_icon.png" width="20" height="20"/>
+        <image name="reply_icon.png" width="20" height="20"/>
+        <image name="retweet_icon.png" width="20" height="20"/>
     </resources>
 </document>
