@@ -53,6 +53,43 @@ class Tweet {
         }
     }
     
+    func onRetweet() {
+        if let status = retweetStatus[index!] { // check whether retweet or unretweet
+            if status { // unretweet
+                self.unretweet({ (response, error) -> Void in
+                    if response != nil {
+                        print("unretweeted")
+                        self.setUnretweetStatus()
+                    } else {
+                        print("Failed to retweet")
+                        return
+                    }
+                })
+            } else { // retweet
+                self.retweet({ (response, error) -> Void in
+                    if response != nil {
+                        print("retweeted")
+                        self.setRetweetStatus()
+                    } else {
+                        print("Failed to retweet")
+                        return
+                    }
+                })
+            }
+        } else { // retweet
+            self.retweet({ (response, error) -> Void in
+                if response != nil {
+                    print("retweeted")
+                    self.setRetweetStatus()
+                } else {
+                    print("Failed to retweet")
+                    return
+                }
+            })
+            
+        }
+    }
+    
     func retweet(completion: (response: AnyObject?, error: NSError?)->Void) {
         if let id = self.id {
             sendPOSTRequest("1.1/statuses/retweet/\(id).json?id=\(id)", completion: completion)

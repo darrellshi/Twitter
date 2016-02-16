@@ -25,6 +25,8 @@ class HomeViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        
+        
         retweetStatus = [Int: Bool]()
         favoriteStatus = [Int: Bool]()
         
@@ -43,6 +45,7 @@ class HomeViewController: UIViewController {
                 print(error)
             }
         }
+
     }
     
     func onFresh() {
@@ -65,6 +68,14 @@ class HomeViewController: UIViewController {
         
         self.dismissViewControllerAnimated(true) { () -> Void in
             
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPathForCell(cell) {
+            let vc = segue.destinationViewController as! DetailViewController
+            vc.tweet = tweets?[indexPath.row]
         }
     }
 }
@@ -100,7 +111,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let favoritedImage = UIImage(named: "favorite_icon.png")
             cell.favoriteButton.setImage(favoritedImage, forState: .Normal)
         }
-        
+
         return cell
     }
 }
