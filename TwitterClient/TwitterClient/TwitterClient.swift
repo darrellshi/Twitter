@@ -47,6 +47,34 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func userTimelineWithCompletion(screenName: String, params: NSDictionary?,completion: (response: NSDictionary?, error: NSError?)->()) {
+        TwitterClient.sharedInstance.GET("1.1/statuses/user_timeline.json?screen_name=\(screenName)", parameters: params, progress: { (process: NSProgress) -> Void in
+            }, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let dictionary = response as? [NSDictionary]
+                completion(response: dictionary?.first, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                completion(response: nil, error: error)
+        })
+    }
+    
+    func postTweetWithCompletion(params: NSDictionary?, completion: (response: NSDictionary?, error: NSError?)->()) {
+        TwitterClient.sharedInstance.POST("1.1/statuses/update.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dic = response as! NSDictionary
+            completion(response: dic, error: nil)
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                completion(response: nil, error: error)
+        }
+    }
+    
+    func followUserWithCompletion(params: NSDictionary?, completion: (response: NSDictionary?, error: NSError?)->()) {
+        TwitterClient.sharedInstance.POST("1.1/friendships/create.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dic = response as! NSDictionary
+            completion(response: dic, error: nil)
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                completion(response: nil, error: error)
+        }
+    }
+    
     func openURL(url: NSURL) {
         fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken:BDBOAuth1Credential(queryString: url.query), success: { (accessToken: BDBOAuth1Credential!) -> Void in
             print("Successfully got the access token!")

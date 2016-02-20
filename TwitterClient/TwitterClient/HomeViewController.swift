@@ -8,14 +8,16 @@
 
 import UIKit
 
-var retweetStatus: [Int: Bool]!
-var favoriteStatus: [Int: Bool]!
+protocol TableCellDelegate: class {
+    func buttonDidTap(screenName: String)
+}
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet]?
     var refresher: UIRefreshControl!
     var isLoadingMoreData = false
+    var screenName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +26,6 @@ class HomeViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        
-        
-        
-        retweetStatus = [Int: Bool]()
-        favoriteStatus = [Int: Bool]()
         
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "navigation_logo.png"))
         
@@ -72,10 +69,16 @@ class HomeViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
-        if let indexPath = tableView.indexPathForCell(cell) {
-            let vc = segue.destinationViewController as! DetailViewController
-            vc.tweet = tweets?[indexPath.row]
+        if segue.identifier == "ToDetailView" {
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPathForCell(cell) {
+                let vc = segue.destinationViewController as! DetailViewController
+                vc.tweet = tweets?[indexPath.row]
+            }
+        }
+        if segue.identifier == "ToUserHeaderViewController" {
+            let vc = segue.destinationViewController as! UserHeaderViewController
+            vc.screenName = self.screenName
         }
     }
 }
@@ -90,33 +93,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
-        cell.tweet = tweets![indexPath.row]
-        cell.index = indexPath.row
-        if let retweeted = retweetStatus[indexPath.row] {
+        let tweet = tweets![indexPath.row]
+        cell.tweet = tweet
+        if let retweeted = tweet.favorited {
             if retweeted {
-                let retweetImage = UIImage(named: "retweet_icon_highlighted.png")
+                let retweetImage = UIImage(named: "retweet-action-on.png")
                 cell.retweetButton.setImage(retweetImage, forState: .Normal)
             }
-        } else {
-            let retweetImage = UIImage(named: "retweet_icon.png")
-            cell.retweetButton.setImage(retweetImage, forState: .Normal)
-
         }
-        if let favorited = favoriteStatus[indexPath.row] {
+        if let favorited = tweet.favorited {
             if favorited {
-                let favoritedImage = UIImage(named: "favorite_icon_highlighted.png")
+                let favoritedImage = UIImage(named: "like-action-on.png")
                 cell.favoriteButton.setImage(favoritedImage, forState: .Normal)
             }
-        } else {
-            let favoritedImage = UIImage(named: "favorite_icon.png")
-            cell.favoriteButton.setImage(favoritedImage, forState: .Normal)
         }
 
+        cell.delegate = self
         return cell
     }
 }
 
-extension HomeViewController: UIScrollViewDelegate {
+extension HomeViewController: UIScrollViewDelegate, UIGestureRecognizerDelegate, TableCellDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if !isLoadingMoreData {
             let scrollViewContentHeight = scrollView.contentSize.height
@@ -147,5 +144,10 @@ extension HomeViewController: UIScrollViewDelegate {
                 }
             }
         }
+    }
+    
+    func buttonDidTap(screenName: String) {
+        self.screenName = screenName
+        performSegueWithIdentifier("ToUserHeaderViewController", sender: nil)
     }
 }
