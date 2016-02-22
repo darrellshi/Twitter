@@ -45,12 +45,16 @@ class TweetCell: UITableViewCell {
             if let retweetCount = tweet?.retweetCount {
                 if retweetCount != 0 {
                     retweetCountLabel.text = String(retweetCount)
+                } else {
+                    retweetCountLabel.text = ""
                 }
             }
             
             if let favoritedCount = tweet?.favoritesCount {
                 if favoritedCount != 0 {
                     favoriteCountLabel.text = String(favoritedCount)
+                } else {
+                    favoriteCountLabel.text = ""
                 }
             }
             

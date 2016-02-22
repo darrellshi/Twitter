@@ -42,7 +42,6 @@ class HomeViewController: UIViewController {
                 print(error)
             }
         }
-
     }
     
     func onFresh() {

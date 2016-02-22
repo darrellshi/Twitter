@@ -10,6 +10,7 @@ import UIKit
 
 class ComposeViewController: UIViewController,  UITextViewDelegate{
     @IBOutlet weak var textBox: UITextView!
+    @IBOutlet weak var remainingCountLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class ComposeViewController: UIViewController,  UITextViewDelegate{
             TwitterClient.sharedInstance.postTweetWithCompletion(params, completion: { (response, error) -> () in
                 if response != nil {
                     print("tweet posted")
-                    self.popupMessage("Tweet posted!")
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 } else {
                     print("Failed to post tweet")
                     self.popupMessage("Failed to tweet")
@@ -47,6 +48,17 @@ class ComposeViewController: UIViewController,  UITextViewDelegate{
     func textViewDidBeginEditing(textView: UITextView) {
         textView.text = ""
         textView.textColor = UIColor.blackColor()
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        let remainingCount = 140 - textView.text.characters.count
+        remainingCountLabel.text = "\(remainingCount)"
+        if remainingCount == -1 {
+            remainingCountLabel.textColor = UIColor.redColor()
+        }
+        if remainingCount == 0 {
+            remainingCountLabel.textColor = UIColor.blackColor()
+        }
     }
     
     private func popupMessage(message: String) {

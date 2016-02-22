@@ -95,12 +95,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8WU-DK-tsq">
+                                <rect key="frame" x="283.5" y="72" width="28.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="8WU-DK-tsq" firstAttribute="top" secondItem="zbS-tX-cdI" secondAttribute="bottom" constant="8" id="74X-jM-EjD"/>
                             <constraint firstItem="K98-Fb-Fyv" firstAttribute="trailing" secondItem="HAk-f7-Lcm" secondAttribute="trailingMargin" constant="4" id="IRE-8D-QVj"/>
                             <constraint firstItem="OgZ-dh-lul" firstAttribute="top" secondItem="K98-Fb-Fyv" secondAttribute="bottom" constant="287" id="IrC-oV-wjX"/>
                             <constraint firstItem="K98-Fb-Fyv" firstAttribute="leading" secondItem="HAk-f7-Lcm" secondAttribute="leadingMargin" constant="-4" id="NLa-gz-kvP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8WU-DK-tsq" secondAttribute="trailing" constant="-8" id="UhO-il-EL0"/>
                             <constraint firstItem="K98-Fb-Fyv" firstAttribute="top" secondItem="zbS-tX-cdI" secondAttribute="bottom" constant="8" id="aTe-VN-4R4"/>
                         </constraints>
                     </view>
@@ -117,6 +125,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="remainingCountLabel" destination="8WU-DK-tsq" id="k5A-dC-eyG"/>
                         <outlet property="textBox" destination="K98-Fb-Fyv" id="ktc-Fp-k7X"/>
                     </connections>
                 </viewController>
